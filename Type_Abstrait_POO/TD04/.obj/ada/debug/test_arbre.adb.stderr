@@ -1,0 +1,7 @@
+test_arbre.adb:3:05: file "arbre.ads" does not contain expected unit
+test_arbre.adb:3:05: expected unit "Arbre (spec)"
+test_arbre.adb:3:05: found unit "Libarbre (spec)"
+test_arbre.adb:7:41: (style) space required
+test_arbre.adb:12:14: (style) space required
+test_arbre.adb:13:22: missing ")"
+test_arbre.adb:14:22: missing ")"

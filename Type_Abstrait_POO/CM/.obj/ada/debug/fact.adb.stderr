@@ -1,0 +1,3 @@
+fact.adb:6:05: (style) subprogram body has no previous spec
+fact.adb:8:09: (style) "begin" in wrong column, should be in column 5
+fact.adb:13:09: (style) "end" in wrong column, should be in column 5

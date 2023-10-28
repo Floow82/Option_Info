@@ -1,0 +1,15 @@
+library project Lib_Deque_c is
+    for Create_Missing_Dirs use "True";
+    for Languages use ("C");
+
+    for Library_Name use "lib_deque_c";
+    for Object_Dir use ".obj";
+    for Library_Dir use "lib";
+    for Library_Kind use "static";
+    for Source_Dirs use ("src_lib/**");
+
+    package Compiler is
+        for Driver ("C") use "gcc";
+        for Switches ("C") use ("-g", "-W", "-Wall", "-Werror", "-std=c90", "-pedantic");
+    end Compiler;
+end Lib_Deque_C;

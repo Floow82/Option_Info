@@ -1,0 +1,88 @@
+@startuml jeu_perso_v1
+skinparam groupinherintance 2
+package jeu {
+    Interface IElement_jeu {
+    }
+    Abstract Element_jeu {
+        - Real Niveau_Vie
+    }
+    package jeu_personnage {
+    Abstract Personnage_Vivant <P> {
+        - Id_pers
+    }
+    package jeu_personnage_animal {
+        Abstract Personnage_Animal {}
+        Class Dragon {
+            - int Puissance_Attaque
+            - int Nb_Iteration
+    }
+    }
+    package jeu_personnage_humain {
+        Abstract Personnage_Humain {}
+        Class Ouvrier {
+            - Int Puissance_Travail
+            - Int nb_Iteration
+        }
+        Class Guerrier {
+            - Int Puissance_Attaque
+            - Int Nb_Iteration
+        }
+    }
+
+    }
+    package jeu_objet {
+        Class munition {
+        - int Puiss_Attaque
+        }
+
+        Abstract Catapulte {
+            - int nb_instance
+        }
+
+        Abstract Arme {
+            - int nb_munition
+        }
+    }
+
+    package jeu_comportement {
+        Interface Attaque {}
+    }
+
+    package jeu_personnage_map {
+        Class Base {
+            - Num nom
+        }
+
+        Enum Couleur {
+            Rouge
+            Vert
+            Bleu
+            Jaune
+
+        }
+    }
+
+    package jeu_personnage_element_deplacement {
+        interface IDeplacable{
+            - Deplacer()
+        }
+    }
+
+}
+IElement_jeu <|... Element_jeu
+Element_jeu <|-- Personnage_Vivant
+Element_jeu --> Base
+Element_jeu <|-- munition
+Base --> IElement_jeu
+Personnage_Vivant <|-- Personnage_Humain
+Personnage_Vivant <|-- Personnage_Animal
+Personnage_Animal <|-- Dragon
+Personnage_Humain <|-- Guerrier
+Personnage_Humain <|-- Ouvrier
+munition --|> Catapulte
+Catapulte --|> Arme
+Guerrier <--> "Posseder" Arme
+Couleur --|> Base
+IDeplacable <|... Catapulte
+Personnage_Vivant ...|> IDeplacable
+@enduml

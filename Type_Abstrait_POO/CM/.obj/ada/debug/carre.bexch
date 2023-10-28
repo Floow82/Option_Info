@@ -1,0 +1,17 @@
+[GENERATED OBJECT FILE]
+b__carre.o
+[PROJECT FILES]
+/Users/florineteulieres/Desktop/A3/Type_Abstrait_POO/CM/cm.gpr
+20231008111547 983ba697e0ea60e4ed5a768388899c1c
+[BOUND OBJECT FILES]
+/Users/florineteulieres/Desktop/A3/Type_Abstrait_POO/CM/.obj/ada/debug/carre.o
+[GENERATED SOURCE FILES]
+b__carre.ads
+b__carre.adb
+b__carre.ali
+[RESULTING OPTIONS]
+-L/Users/florineteulieres/Desktop/A3/Type_Abstrait_POO/CM/.obj/ada/debug/
+-L/Users/florineteulieres/Desktop/A3/Type_Abstrait_POO/CM/.obj/ada/debug/
+-L/users/florineteulieres/desktop/opt/gnat/2020/lib/gcc/x86_64-apple-darwin17.7.0/8.4.1/adalib/
+-static
+/users/florineteulieres/desktop/opt/gnat/2020/lib/gcc/x86_64-apple-darwin17.7.0/8.4.1/adalib/libgnat.a

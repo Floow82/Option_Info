@@ -1,0 +1,40 @@
+CC=gcc
+MKDIR=mkdir -p
+RMFILE=rm -fr
+CFLAGS= -Wall -std=c90 -pedantic -g
+OBJ_DIR=.obj
+SRC_DIR=src_c
+BIN_DIR=exec
+SRC= $(wildcard $(SRC_DIR)/*.c)
+OBJ=$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
+EXEC=$(patsubst $(SRC_DIR)/%.c,%,$(SRC))
+OUT_DIRS = $(OBJ_DIR) $(BIN_DIR)
+
+.SECONDARY: $(OBJ)
+
+.PHONY: all clean mrproper
+
+all: $(EXEC)
+
+$(EXEC): %: $(BIN_DIR)/%
+
+$(BIN_DIR)/%: $(OBJ_DIR)/%.o $(BIN_DIR)
+	@echo "[Link]"
+	$(CC) -o $@ $<
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(OBJ_DIR)
+	@echo "[Compile & Build]"
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+$(OUT_DIRS):
+	@echo "[Setup]"
+	$(MKDIR) $@
+
+clean:
+	@echo "[Suppr. Obj & Exec files]"
+	$(RMFILE) $(OBJ_DIR)/*.o
+	$(RMFILE) $(BIN_DIR)/$(EXEC)
+
+mrproper: clean
+	@echo "[Suppr. Obj & Exec Dir]"
+	$(RMFILE) $(OUT_DIRS)

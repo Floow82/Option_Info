@@ -1,0 +1,33 @@
+@startuml undeque
+package undeque {
+    Class Node <T> {
+        - T state
+        - Node (val : T)
+        - Node getNext()
+        - setNext(nd : Node)
+        - Node getPrev()
+        - setPrev (nd : Node)
+        - T getData ()
+    }
+    Class Deque <T> {
+        - long TabSize
+        + Deque ()
+        + long getSize ()
+        + boolean isEmpty ()
+        + T first ()
+        + T last ()
+        + insertHead (elem : T)
+        + insertQueue (elem : T)
+        + T removeHead ()
+        + T removeQueue ()
+        + deleteDeque ()
+    }
+}
+Deque o-- "head\n 0..1" Node
+Deque o-- "queue\n 0..1" Node
+Node o-- "next\n 0..1" Node
+Node o-- "prev\n 0..1" Node
+@enduml
+
+' Node et Deque sont des constructeurs
+' <T> est un type generique, on le connais pas ducoup on fait comme ca
