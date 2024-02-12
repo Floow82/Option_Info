@@ -1,0 +1,113 @@
+class Vehicule {
+  - type: String
+  - marque: String
+  - modele: String
+  - couleur: String
+  - nbPlaces: int
+  - energie: String
+  - puissanceReelle: double
+  + getters()
+  + setters()
+}
+
+class Client {
+  - civilite: String
+  - nom: String
+  - prenom: String
+  - adresse: String
+  - coordonnees: String
+  - numSecu: String
+  + getters()
+  + setters()
+}
+
+class Agence {
+  - id: int
+  - nom: String
+  - adresse: String
+  - coordonnees: String
+  - personnels: List<Personnel>
+  - pays: String
+  + getters()
+  + setters()
+}
+
+class Personnel {
+  - civilite: String
+  - nom: String
+  - prenom: String
+  - adresse: String
+  - coordonnees: String
+  - numSecu: String
+  + getters()
+  + setters()
+}
+
+abstract class FicheLocation {
+  - agenceDepart: Agence
+  - dateLocation: Date
+  - vehiculeLoue: Vehicule
+  - client: Client
+  - assurance: Assurance
+  - caution: double
+  - employe: Personnel
+  + getters()
+  + setters()
+  + abstract calculerMontantLocation(): double
+}
+
+class FicheDepartLocation {
+  - nbKilometresAvantDepart: double
+  - immatriculation: String
+  - employeRealisantFiche: Personnel
+  + getters()
+  + setters()
+}
+
+class FicheRetourLocation {
+  - agenceRetour: Agence
+  - dateRetour: Date
+  - kilometrageFinal: double
+  - kilometrageEffectue: double
+  - immatriculation: String
+  - employeRetour: Personnel
+  - degats: List<Degat>
+  + getters()
+  + setters()
+}
+
+class Degat {
+  - type: String
+  - coutReparation: double
+  + getters()
+  + setters()
+}
+
+class Assurance {
+  - nomSociete: String
+  - numPolice: String
+  + getters()
+  + setters()
+}
+
+class LocationManager {
+  + evaluerCoutReparation(Vehicule vehicule, List<Degat> degats): double
+}
+
+class ReparationManager {
+  + vehiculeEnReparation(Vehicule vehicule): boolean
+  + dateDisponibiliteLocation(Vehicule vehicule): Date
+}
+
+class AgenceManager {
+  + agencesProprietaires(Vehicule vehicule): List<Agence>
+}
+
+Vehicule --|> FicheLocation
+FicheLocation <|-- FicheDepartLocation
+FicheLocation <|-- FicheRetourLocation
+FicheLocation --|> Client
+FicheLocation --|> Assurance
+FicheLocation --|> Personnel
+FicheRetourLocation --|> Degat
+Agence --|> Personnel

@@ -1,12 +1,18 @@
 package fr.ensma.a3.ia.element.personnages;
 
 import fr.ensma.a3.ia.element.ElementJeu;
+import fr.ensma.a3.ia.element.comportement.IDeplacable;
+import fr.ensma.a3.ia.element.comportement.etats.*;
 import fr.ensma.a3.ia.map.Base;
 import fr.ensma.a3.ia.utils.ValParamException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class PersonnageVivant extends ElementJeu {
+public abstract class PersonnageVivant extends ElementJeu implements IDeplacable, IAutomate {
     protected String IdentifiantPerson;
-
+    private IEtat etatAuRepos;
+    private IEtat etatEnDeplacement;
+    private IEtat etatCourant;
     /**
      * Instancie un personnage vivant
      * @param niv Float (non null)
@@ -20,6 +26,9 @@ public class PersonnageVivant extends ElementJeu {
             throw new ValParamException(getClass().getSimpleName() + " : Param(s) null");
         }
         IdentifiantPerson = identif;
+        etatAuRepos = new AuRepos(this);
+        etatEnDeplacement = new EnDeplacement(this);
+        etatCourant = etatAuRepos;
     }
     public final String getIdentifiantPerson() {return IdentifiantPerson;}
 
@@ -54,4 +63,46 @@ public class PersonnageVivant extends ElementJeu {
     }
 
     private static final int HASH = 13;
+    private final Logger logger = LogManager.getLogger(PersonnageVivant.class);
+    @Override
+    public final IEtat getAurepos() {
+        return etatAuRepos;
+    }
+
+    @Override
+    public final IEtat getEnDeplacement() {
+        return etatEnDeplacement;
+    }
+    @Override
+    public final void setEtatCourant(final IEtat etat) {
+        etatCourant = etat;
+    }
+
+    //Ajout de deplacer (depuis IDeplacable) suite à l'ajout du strategy
+    @Override
+    public void seDeplacer() {
+        //compoDeplacement.deplacer(this);
+        try {
+            etatCourant.seDeplacer();
+            compDep.seDeplacer(this);
+        } catch (TransitionException ex) {
+            logger.warn("Action demandée non réalisable !!!");
+        } catch (ValParamException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //à Ajouter dans Interface Ideplacable
+    public void arretDeplacement() {
+        try {
+            etatCourant.arret();
+        } catch (TransitionException ex) {
+            logger.info("Action demandée non réalisable !!!");
+        }
+
+    }
+    //@Override
+    //public void seDeplacer(ElementJeu elem) throws ValParamException {
+    //    compDep.seDeplacer(this);
+    //}
 }

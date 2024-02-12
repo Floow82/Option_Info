@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: fr.ensma.a3.ia.map.TestBase
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.816 s <<< FAILURE! - in fr.ensma.a3.ia.map.TestBase
+textToString_Inte  Time elapsed: 0.026 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <BaseBase:Base> but was: <Base Base: Base>
+	at fr.ensma.a3.ia.map.TestBase.textToString_Inte(TestBase.java:90)
+
+testAfficheElements_Inte  Time elapsed: 0.009 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "fr.ensma.a3.ia.element.IElementJeu.toString()" because "this.elemSim1" is null
+	at fr.ensma.a3.ia.map.TestBase.testAfficheElements_Inte(TestBase.java:105)
+

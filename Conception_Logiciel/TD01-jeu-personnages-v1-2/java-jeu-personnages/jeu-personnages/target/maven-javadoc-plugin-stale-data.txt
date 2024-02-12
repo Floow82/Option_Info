@@ -1,0 +1,57 @@
+@options
+@packages
+-classpath
+'/root/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.0/log4j-api-2.21.0.jar:/root/.m2/repository/org/apache/logging/log4j/log4j-core/2.21.0/log4j-core-2.21.0.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'/A3-Workspace/java-jeu-personnages/jeu-personnages/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/A3-Workspace/Docs/api/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'jeu-personnages 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'jeu-personnages 1.0-SNAPSHOT API'
+fr.ensma.a3.ia.jeupersonnages.outils
+fr.ensma.a3.ia.jeupersonnages.elements.objets
+fr.ensma.a3.ia.jeupersonnages.elements
+fr.ensma.a3.ia.jeupersonnages.elements.comportement.attaques
+fr.ensma.a3.ia.jeupersonnages.elements.comportement
+fr.ensma.a3.ia.jeupersonnages.elements.personnages.humains
+fr.ensma.a3.ia.jeupersonnages.elements.personnages
+fr.ensma.a3.ia.jeupersonnages.elements.personnages.animaux
+fr.ensma.a3.ia.jeupersonnages.map
+fr.ensma.a3.ia.jeupersonnages
+/root/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.0/log4j-api-2.21.0.jar = 1698295398445
+/root/.m2/repository/org/apache/logging/log4j/log4j-core/2.21.0/log4j-core-2.21.0.jar = 1698295398606
+/A3-Workspace/java-jeu-personnages/jeu-personnages/src/main/java = 1697796852000
+/A3-Workspace/Docs/api/apidocs/tag-search-index.js = 1698296377141
+/A3-Workspace/Docs/api/apidocs/overview-tree.html = 1698296377127
+/A3-Workspace/Docs/api/apidocs/module-search-index.js = 1698296377139
+/A3-Workspace/Docs/api/apidocs/index.html = 1698296377129
+/A3-Workspace/Docs/api/apidocs/package-search-index.js = 1698296377139
+/A3-Workspace/Docs/api/apidocs/jquery-ui.overrides.css = 1698296377162
+/A3-Workspace/Docs/api/apidocs/serialized-form.html = 1698296377054
+/A3-Workspace/Docs/api/apidocs/index-all.html = 1698296377150
+/A3-Workspace/Docs/api/apidocs/allpackages-index.html = 1698296377138
+/A3-Workspace/Docs/api/apidocs/member-search-index.js = 1698296377140
+/A3-Workspace/Docs/api/apidocs/script.js = 1698296377156
+/A3-Workspace/Docs/api/apidocs/stylesheet.css = 1698296377155
+/A3-Workspace/Docs/api/apidocs/overview-summary.html = 1698296377152
+/A3-Workspace/Docs/api/apidocs/help-doc.html = 1698296377153
+/A3-Workspace/Docs/api/apidocs/element-list = 1698296377002
+/A3-Workspace/Docs/api/apidocs/allclasses-index.html = 1698296377137
+/A3-Workspace/Docs/api/apidocs/type-search-index.js = 1698296377140
+/A3-Workspace/Docs/api/apidocs/search.js = 1698296377157

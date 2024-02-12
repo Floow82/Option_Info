@@ -1,0 +1,157 @@
+
+@startuml
+skinparam groupinheritance 2
+package jeupersonnages{
+        package jeupersonnages.map {
+                enum ECouleurBase {
+                        rouge
+                        jaune
+                        vert
+                        bleu
+                }
+                class Base{
+                        -nom : String[1]
+                }
+                Base *--"coulBase 1" ECouleurBase
+        }
+        package jeupersonnages.elements {
+                abstract ElementJeu {
+                        #nivVie : Real[1]
+                }
+                package jeupersonnages.elements.personnages {
+                        abstract PersoVivant {
+                                #identPerso : String[1]
+                        }
+                        package jeupersonnages.element.personnage.groupement{
+                                Interface ITroupe{
+                                        +rejoindreTroupe(obs: IDeplacable)
+                                        +quitterTroupe(obs:IDeplacable)
+                                        +deplacer()
+                                }
+                                class Troupe{
+                                        -nomTroupe : String[1]
+                                }
+                                Interface IDeplacable{
+                                +deplacer()
+                                }
+                                IDeplacable <|.. Troupe
+                                ITroupe <|.. Troupe
+                                Troupe  o--|> IDeplacable
+                        }
+                        package jeupersonnages.elements.personnages.humains {
+                                abstract PersoHumain {
+
+                                }
+                                class Ouvrier {
+                                        -puissTravail : Integer[1]
+                                        -{static} numInstance : Integer[1]
+                                }
+                                class Guerrier {
+                                        -puissAtt : Integer[1]
+                                        -{static} numInstance : Integer[1]
+                                }
+                                PersoHumain <|-- Ouvrier
+                                PersoHumain <|-- Guerrier
+                        }
+                        PersoVivant <|-- PersoHumain
+                        package jeupersonnages.elements.personnages.animaux {
+                                abstract PersoAnimal{
+
+                                }
+                                class Dragon {
+                                        -puissAtt : [Integer]
+                                        -{static} numInstance : Integer[1]
+                                }
+                                PersoAnimal <|-- Dragon
+                        }
+                        PersoVivant <|-- PersoAnimal
+                }
+                ElementJeu <|-- PersoVivant
+                interface IElementJeu {
+                }
+                IElementJeu <|.. ElementJeu
+                package jeupersonnages.elements.objets {
+                        abstract Arme {
+                                -puissAtt : Integer[1]
+                        }
+                        abstract Catapulte {
+                                -{static} numInstance : Integer[1]
+                        }
+                        Arme <|-- Catapulte
+                        class Munition{
+                                -puissAtt : Integer[1]
+                        }
+                        Catapulte o-- "mesBoulets 0 .. 10" Munition
+                        Catapulte "maCata\n0 .. 1" <--> "monGuer\n0 .. 1" Guerrier
+
+                }
+                ElementJeu <|-- Arme
+                package jeupersonnages.elements.comportement {
+
+                    package jeupersonnages.elements.comportement.deplacement{
+                        interface IDeplacement{
+                            +deplacer(IElement)
+                        }
+                        class Voler{}
+                        class Marcher{}
+                        class Courir{}
+                        class Flotter{}
+                        class Immobile{}
+                        Immobile ..|>IDeplacement
+                        Voler ..|> IDeplacement
+                        Marcher ..|> IDeplacement
+                        Courir ..|> IDeplacement
+                        Flotter ..|> IDeplacement
+                        ElementJeu o--|> IDeplacement
+                    }
+                package jeupersonnages.elements.comportement.attaques {
+                                interface ICompoAttaque {
+                                        +attaquer(cible : IAttaquable)
+                                        +attaquer(cible : IAttaquableTerre)
+                                }
+                                class AttaquePas implements ICompoAttaque
+                                class AuCouteau implements ICompoAttaque
+                                class ALaHache implements ICompoAttaque
+                                class Sortilege implements ICompoAttaque
+                                class CracherFeu implements ICompoAttaque
+                                ElementJeu o---> "compoAttaque 1" ICompoAttaque
+                }
+                        interface IAttaquable {
+                                +estAttaque(puiss : Integer)
+                        }
+                        interface IAttaquant {
+                                +aLAttaque(cible:IAttaquable)
+                                +getPuissAttaque() : Integer
+                                +getIdentPerson() : String
+                        }
+                        Interface IAttaque {}
+
+                        interface IAttaquableTerre {
+                                +estAttaque(puiss : Integer)
+                        }
+                        interface IAttaquantTerre {
+                                +aLAttaque(cible:IAttaquableTerre)
+                                +getPuissAttaque() : Integer
+                                +getIdentPerson() : String
+                        }
+                        Interface IAttaqueTerre {}
+                        Catapulte ..|> IDeplacable
+                        PersoVivant ..|> IDeplacable
+                        IAttaque --|> IAttaquant
+                        IAttaque --|> IAttaquable
+                        IAttaqueTerre --|> IAttaquantTerre
+                        IAttaqueTerre --|> IAttaquableTerre
+
+                }
+                Catapulte ..|> IAttaque
+                Dragon ..|> IAttaque
+                Guerrier ..|> IAttaqueTerre
+                Guerrier ..|> IAttaquable
+                Ouvrier ...|> IAttaquable
+                Ouvrier ...|> IAttaquableTerre
+
+        }
+        IElementJeu "elem *" <-- Base
+        ElementJeu --> "laBase 1" Base
+}
+@enduml
