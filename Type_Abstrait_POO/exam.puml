@@ -1,0 +1,41 @@
+@startuml
+
+abstract class SuperState {
+  transitionsEntrantes: Transition[*];
+  transitionsSortantes: Transition[*];
+}
+
+class Region {
+  name: String;
+  pseudoEtatInitial: PseudoEtatInitial;
+  etats: Etat[*];
+}
+
+abstract class Etat {
+  name: String;
+  entry: String;
+  exit: String;
+  always: String;
+}
+
+class PseudoEtatInitial extends Etat {
+  transitionSortante: Transition;
+}
+
+class Transition {
+  evenement: String;
+  garde: String;
+  action: String;
+}
+
+class PseudoEtatChoix extends Etat {
+  transitionElse: Transition;
+}
+
+SuperState --|> Etat
+Region o-- Etat
+Region o-- PseudoEtatInitial
+Region o-- PseudoEtatChoix
+Region *-- Transition: transitions
+
+@enduml

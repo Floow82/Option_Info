@@ -23,7 +23,7 @@ T_matrice initMatrice (const int n, const int m)
 
     /*Probleme sur l'allocation*/
     if (errno) {
-        perror("Erreur allocation strcuture matrice");
+        perror("Erreur allocation structure matrice");
         return NULL;
     }
 
@@ -37,7 +37,7 @@ T_matrice initMatrice (const int n, const int m)
         return NULL;
     }
 
-    /*Alloue dynamiquement de la memoire poru chaque colonne de la matrice*/
+    /*Alloue dynamiquement de la memoire pour chaque colonne de la matrice*/
     /* m element de type float*/
     for (i=0; i<n; i++){
         mat->matrice[i] = (float*)calloc(m, sizeof(float));

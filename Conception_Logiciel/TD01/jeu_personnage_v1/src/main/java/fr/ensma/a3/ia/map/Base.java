@@ -42,12 +42,40 @@ public class Base {
     public void addElementJeu(final IElementJeu el) {
         elem.add(el);
     }
+    /**
+     * Obtient le nombre d'éléments dans la base
+     *
+     * @return int nb élément(s)
+     */
+    public final int getNbElem() {
+        return elem.size();
+    }
+    /**
+     * Obtient le nom de la base
+     *
+     * @return String le nom
+     */
+    public final String getNomBase() {
+        return nomBase;
+    }
 
+    /**
+     * Obtient la couleur de la base
+     *
+     * @return {@link ECouleur} la couleur
+     */
+    public final ECouleur getCoulBase() {
+        return coulBase;
+    }
     /**
      * Redéfinition de toString
      */
     @Override
     public String toString() {
+        return "Base " + nomBase + ": " + coulBase;
+    }
+
+    public String afficheElements() {
         StringBuffer buf = new StringBuffer();
         buf.append("Base " + nomBase + ": " + coulBase + "\n");
         buf.append("Éléments jeu :\n");

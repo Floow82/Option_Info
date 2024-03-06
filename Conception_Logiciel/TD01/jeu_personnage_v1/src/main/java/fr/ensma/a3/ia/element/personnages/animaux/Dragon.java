@@ -2,13 +2,13 @@ package fr.ensma.a3.ia.element.personnages.animaux;
 
 import fr.ensma.a3.ia.element.comportement.IAttaquable;
 import fr.ensma.a3.ia.element.comportement.IAttaque;
-import fr.ensma.a3.ia.element.comportement.IDeplacable;
+import fr.ensma.a3.ia.element.comportement.deplacement.Voler;
 import fr.ensma.a3.ia.map.Base;
 import fr.ensma.a3.ia.utils.ValParamException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Dragon extends PersonnageAnimal implements IAttaque, IDeplacable {
+public class Dragon extends PersonnageAnimal implements IAttaque {
     private Integer PuissAtt;
     private static int NumInstance;
 
@@ -42,10 +42,10 @@ public class Dragon extends PersonnageAnimal implements IAttaque, IDeplacable {
         return "Dragon : " + IdentifiantPerson + " - Niv. Vie : " + nivVie + " - P Att : " + PuissAtt;
     }
 
-    @Override
-    public void seDeplacer() {
-        logger.info(IdentifiantPerson + " dit : je me déplace en volant");
-    }
+    //@Override
+    //public void seDeplacer() {
+    //    logger.info(IdentifiantPerson + " dit : je me déplace en volant");
+    //}
 
     @Override
     public void ALAttaque(final IAttaquable cible) {
@@ -64,6 +64,7 @@ public class Dragon extends PersonnageAnimal implements IAttaque, IDeplacable {
             throw new ValParamException(getClass().getName() + " : Param(s) null");
         }
         PuissAtt = patt;
+        compDep = new Voler();
     }
 
     private static Logger logger = LogManager.getLogger(Dragon.class);

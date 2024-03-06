@@ -1,10 +1,11 @@
 package fr.ensma.a3.ia.element.personnages.humains;
 
+import fr.ensma.a3.ia.element.comportement.IAttaquableTerre;
 import fr.ensma.a3.ia.map.Base;
 import fr.ensma.a3.ia.utils.ValParamException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-public class Ouvrier extends PersonnageHumain {
+public class Ouvrier extends PersonnageHumain implements IAttaquableTerre {
     protected Integer PuissTrav;
     protected static int NumInstance;
 
@@ -18,7 +19,7 @@ public class Ouvrier extends PersonnageHumain {
      */
     public Ouvrier (final Float niv, final Base bse, final String identif, final Integer ptrav) throws ValParamException
     {
-        super (niv, bse, identif);
+        super(niv, bse, identif);
         _init(ptrav);
         NumInstance++;
     }
@@ -32,7 +33,7 @@ public class Ouvrier extends PersonnageHumain {
      */
     public Ouvrier (final Float niv, final Base bse, final Integer ptrav) throws ValParamException
     {
-        super (niv, bse, "Ouvrier" + NumInstance++);
+        super(niv, bse, "Ouvrier" + NumInstance++);
         _init(ptrav);
     }
 
@@ -44,6 +45,10 @@ public class Ouvrier extends PersonnageHumain {
         }
         PuissTrav = ptrav;
     }
+
+    public final Integer getPuissTrav() {
+        return PuissTrav;
+    }
     @Override
     public void estAttaque (final Integer NivPuis)
     {
@@ -52,11 +57,35 @@ public class Ouvrier extends PersonnageHumain {
 
     }
 
-    private String toSring(){
-        return "Ouvrier" + IdentifiantPerson + "-NiveauVie" + nivVie + "-Puissance de travail" + PuissTrav;
+    @Override
+    public String toString (){
+        return "Ouvrier : " + IdentifiantPerson + " - NiveauVie : " + nivVie + " - Puissance Attaque : " + PuissTrav;
+    }
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (!(obj instanceof Ouvrier))
+            return false;
+        final Ouvrier ouv = (Ouvrier) obj;
+        if (PuissTrav == null) {
+            if (ouv.PuissTrav != null)
+                return false;
+        } else if (!PuissTrav.equals(ouv.PuissTrav))
+            return false;
+        return true;
     }
 
-    private final Logger logger = LogManager.getLogger(Ouvrier.class);
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = HASH * result + ((PuissTrav == null) ? 0 : PuissTrav.hashCode());
+        return result;
+    }
 
+    private final Logger logger = LogManager.getLogger(Guerrier.class);
+    private static final int HASH = 11;
 }
 

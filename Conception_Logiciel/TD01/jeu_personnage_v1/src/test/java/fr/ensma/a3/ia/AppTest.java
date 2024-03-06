@@ -1,13 +1,13 @@
 package fr.ensma.a3.ia;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest
 {
     /**
      * Rigorous Test :-)
@@ -18,3 +18,4 @@ public class AppTest
         assertTrue( true );
     }
 }
+

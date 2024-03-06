@@ -1,0 +1,111 @@
+
+@startuml
+skinparam groupinheritance 2
+package jeupersonnages{
+        package jeupersonnages.map {
+                enum ECouleurBase {
+                        rouge
+                        jaune
+                        vert
+                        bleu
+                }
+                class Base{
+                        -nom : String[1]
+                }
+                Base *--"coulBase 1" ECouleurBase
+        }
+        package jeupersonnages.elements {
+                abstract ElementJeu {
+                        #nivVie : Real[1]
+                }
+                package jeupersonnages.elements.personnages {
+                        abstract PersoVivant {
+                                #identPerso : String[1]
+                        }
+                        package jeupersonnages.elements.personnages.humains {
+                                abstract PersoHumain {
+
+                                }
+                                class Ouvrier {
+                                        -puissTravail : Integer[1]
+                                        -{static} numInstance : Integer[1]
+                                }
+                                class Guerrier {
+                                        -puissAtt : Integer[1]
+                                        -{static} numInstance : Integer[1]
+                                }
+                                PersoHumain <|-- Ouvrier
+                                PersoHumain <|-- Guerrier
+                        }
+                        PersoVivant <|-- PersoHumain
+                        package jeupersonnages.elements.personnages.animaux {
+                                abstract PersoAnimal{
+
+                                }
+                                class Dragon {
+                                        -puissAtt : [Integer]
+                                        -{static} numInstance : Integer[1]
+                                }
+                                PersoAnimal <|-- Dragon
+                        }
+                        PersoVivant <|-- PersoAnimal
+                }
+                ElementJeu <|-- PersoVivant
+                interface IElementJeu {
+                }
+                IElementJeu <|.. ElementJeu
+                package jeupersonnages.elements.objets {
+                        abstract Arme {
+                                -puissAtt : Integer[1]
+                        }
+                        abstract Catapulte {
+                                -{static} numInstance : Integer[1]
+                        }
+                        Arme <|-- Catapulte
+                        class Munition{
+                                -puissAtt : Integer[1]
+                        }
+                        Catapulte o-- "mesBoulets 0 .. 10" Munition
+                        Catapulte "maCata\n0 .. 1" <--> "monGuer\n0 .. 1" Guerrier
+
+                }
+                ElementJeu <|-- Arme
+                package jeupersonnages.elements.comportement {
+                        interface IDeplacable{
+                                +deplacer()
+                        }
+                        interface IAttaquable {
+                                +estAttaque(puiss : Integer)
+                        }
+                        interface IAttaquant {
+                                +aLAttaque(cible:IAttaquable)
+                        }
+                        Interface IAttaque {}
+
+                        interface IAttaquableTerre {
+                                +estAttaque(puiss : Integer)
+                        }
+                        interface IAttaquantTerre {
+                                +aLAttaque(cible:IAttaquableTerre)
+                        }
+                        Interface IAttaqueTerre {}
+                        Catapulte ..|> IDeplacable
+                        PersoVivant ..|> IDeplacable
+                        IAttaque --|> IAttaquant
+                        IAttaque --|> IAttaquable
+                        IAttaqueTerre --|> IAttaquantTerre
+                        IAttaqueTerre --|> IAttaquableTerre
+
+                }
+                Catapulte ..|> IAttaque
+                Dragon ..|> IAttaque
+                Guerrier ..|> IAttaqueTerre
+                Guerrier ..|> IAttaquable
+                Ouvrier ...|> IAttaquable
+                Ouvrier ...|> IAttaquableTerre
+
+        }
+        IElementJeu "elem *" <-- Base
+        ElementJeu --> "laBase 1" Base
+}
+@enduml

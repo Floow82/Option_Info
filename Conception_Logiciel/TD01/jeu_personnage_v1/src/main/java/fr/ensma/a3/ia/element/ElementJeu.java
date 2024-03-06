@@ -1,5 +1,7 @@
 package fr.ensma.a3.ia.element;
 
+import fr.ensma.a3.ia.element.comportement.deplacement.IDeplacement;
+import fr.ensma.a3.ia.element.comportement.deplacement.Immobile;
 import fr.ensma.a3.ia.map.Base;
 import java.util.Objects;
 import fr.ensma.a3.ia.utils.ValParamException;
@@ -17,6 +19,7 @@ public abstract class ElementJeu implements IElementJeu{
      * accessible qu'à l'intérieur de cette classe.
      */
     private Base laBase;
+    protected IDeplacement compDep;
 
     /**
      * Constructeur qui initialise niv et bse.
@@ -31,6 +34,8 @@ public abstract class ElementJeu implements IElementJeu{
             nivVie = Objects.requireNonNull(niv);
             laBase = Objects.requireNonNull(bse);
             laBase.addElementJeu(this);
+            compDep = new Immobile();
+
         } catch (final Throwable e) {
             throw new ValParamException(getClass().getSimpleName() + " : Param(s) null");
         }
@@ -46,6 +51,10 @@ public abstract class ElementJeu implements IElementJeu{
     }
     public final Float getNivVie() {
         return nivVie;
+    }
+
+    public void setCompoDeplacement (final IDeplacement newdep) {
+        compDep = Objects.requireNonNull(newdep);
     }
 
     @Override

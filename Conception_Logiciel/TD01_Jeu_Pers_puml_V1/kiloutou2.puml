@@ -1,0 +1,99 @@
+@startuml
+!define classAbstract abstract class
+!define interfaceAbstract abstract interface
+!define interfaceDef interface
+!define methodAbstract abstract method
+
+class FicheLocation {
+    + agenceDepart: Agence
+    + dateLocation: Date
+    + vehiculeLoue: Vehicule
+    + client: Client
+    + assurance: Assurance
+    + caution: double
+    + employe: Personnel
+    + getters()
+    + setters()
+}
+
+class FicheDepartLocation {
+    + nbKilometresAvantDepart: double
+    + immatriculation: String
+    + employeRealisantFiche: Personnel
+    + getters()
+    + setters()
+}
+
+class FicheRetourLocation {
+    + agenceRetour: Agence
+    + dateRetour: Date
+    + kilometrageFinal: double
+    + kilometrageEffectue: double
+    + immatriculation: String
+    + employeRetour: Personnel
+    + degats: List<Degat>
+    + getters()
+    + setters()
+}
+
+class Vehicule {
+    + type: String
+    + etat: EtatVehicule
+    + getters()
+    + setters()
+}
+
+class EtatVehicule {
+    + enReparation(vehicule: Vehicule)
+    + disponiblePourLocation(vehicule: Vehicule)
+    + // autres méthodes représentant les actions possibles
+}
+
+class EnReparation {
+    + enReparation(vehicule: Vehicule)
+    + disponiblePourLocation(vehicule: Vehicule)
+    + // autres méthodes spécifiques à cet état
+}
+
+class DisponiblePourLocation {
+    + enReparation(vehicule: Vehicule)
+    + disponiblePourLocation(vehicule: Vehicule)
+    + // autres méthodes spécifiques à cet état
+}
+
+class Agence {
+    + id: int
+    + nom: String
+    + adresse: String
+    + coordonnees: String
+    + personnels: List<Personnel>
+    + pays: String
+    + agences: List<AgenceComponent>
+    + afficherInfos()
+    + getters()
+    + setters()
+}
+
+interface IAgenceComponent {
+    + afficherInfos()
+}
+
+class AgenceLeaf {
+    + afficherInfos()
+    + // autres méthodes spécifiques à une agence individuelle
+}
+
+class AgenceComposite {
+    - agences: List<IAgenceComponent>
+    + afficherInfos()
+    + // autres méthodes spécifiques à un groupe d'agences
+}
+
+FicheLocation <|-- FicheDepartLocation
+FicheLocation <|-- FicheRetourLocation
+
+Vehicule -- EtatVehicule
+Vehicule *-- Agence : est stationné à
+Agence *-- IAgenceComponent
+
+@enduml
